@@ -1,0 +1,275 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                String             @id @default(uuid())
+  name              String
+  mobile            String             @unique
+  email             String?            @unique
+  passwordHash      String
+  role              String             @default("FARMER") // FARMER, AREA_ADMIN, SUPER_ADMIN, BANK_OFFICER
+  preferredLanguage String             @default("en")
+  status            String             @default("ACTIVE") // ACTIVE, SUSPENDED, PENDING
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+
+  farmerProfile     FarmerProfile?
+  areaAdminProfile  AreaAdminProfile?
+  bankOfficerProfile BankOfficerProfile?
+  documents         LoanDocument[]     @relation("OwnerDocuments")
+  uploadedDocs      LoanDocument[]     @relation("UploadedByDocuments")
+  assistanceRequests AssistanceRequest[] @relation("FarmerRequests")
+  assignedRequests   AssistanceRequest[] @relation("AdminRequests")
+  chatSessions      ChatSession[]
+  auditLogs         AuditLog[]
+  callNotes         CallNote[]
+}
+
+model FarmerProfile {
+  id                  String   @id @default(uuid())
+  userId              String   @unique
+  user                User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  state               String
+  district            String
+  taluk               String
+  village             String
+  pincode             String
+  communicationMethod String   @default("BOTH") // TEXT, VOICE, BOTH
+  landHolding         String?
+  kccNumber           String?
+  createdAt           DateTime @default(now())
+}
+
+model AreaAdminProfile {
+  id           String        @id @default(uuid())
+  userId       String        @unique
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  employeeId   String        @unique
+  isVerified   Boolean       @default(true)
+  mappings     AreaMapping[]
+  createdAt    DateTime      @default(now())
+}
+
+model BankOfficerProfile {
+  id          String   @id @default(uuid())
+  userId      String   @unique
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  bankName    String
+  branch      String
+  designation String
+  createdAt   DateTime @default(now())
+}
+
+model District {
+  id        String   @id
+  name      String
+  stateCode String
+  taluks    Taluk[]
+}
+
+model Taluk {
+  id         String     @id
+  name       String
+  districtId String
+  district   District   @relation(fields: [districtId], references: [id])
+  stateCode  String
+  villages   Village[]
+  mappings   AreaMapping[]
+}
+
+model Village {
+  id         String     @id
+  name       String
+  talukId    String
+  taluk      Taluk      @relation(fields: [talukId], references: [id])
+  districtId String
+  stateCode  String
+  mappings   AreaMapping[]
+}
+
+model AreaMapping {
+  id           String            @id @default(uuid())
+  villageId    String?
+  village      Village?          @relation(fields: [villageId], references: [id])
+  talukId      String
+  taluk        Taluk             @relation(fields: [talukId], references: [id])
+  areaAdminId  String
+  areaAdmin    AreaAdminProfile  @relation(fields: [areaAdminId], references: [id])
+  priority     Int               @default(1)
+  active       Boolean           @default(true)
+  createdAt    DateTime          @default(now())
+}
+
+model LoanDocument {
+  id                      String            @id @default(uuid())
+  ownerId                 String
+  owner                   User              @relation("OwnerDocuments", fields: [ownerId], references: [id])
+  uploadedById            String
+  uploadedBy              User              @relation("UploadedByDocuments", fields: [uploadedById], references: [id])
+  title                   String
+  category                String
+  institutionName         String?
+  maskedLoanAccountNumber String?
+  originalFileName        String
+  storageKey              String
+  mimeType                String
+  fileSize                Int
+  processingStatus        String            @default("COMPLETED") // UPLOADED, PROCESSING, COMPLETED, FAILED
+  documentLanguage        String            @default("en")
+  createdAt               DateTime          @default(now())
+  updatedAt               DateTime          @updatedAt
+
+  analysis                DocumentAnalysis?
+}
+
+model DocumentAnalysis {
+  id                         String       @id @default(uuid())
+  documentId                 String       @unique
+  document                   LoanDocument @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  documentType               String
+  summary                    String
+  tamilExplanation           String
+  englishExplanation         String
+  localizedExplanationJson   String?      // Stores explanations in all 13 languages
+  loanDetailsJson            String       // JSON string
+  interestDetailsJson        String       // JSON string
+  repaymentDetailsJson       String       // JSON string
+  eligibilityDetailsJson     String       // JSON string
+  penaltyDetailsJson         String       // JSON string
+  importantDatesJson         String       // JSON string
+  missingInformationJson     String       // JSON string
+  authenticityRiskLevel      String       @default("LOW") // LOW, MEDIUM, HIGH, UNKNOWN
+  authenticityIndicatorsJson String       // JSON array string
+  authenticityDisclaimer     String
+  confidence                 Float        @default(0.95)
+  analyzedAt                 DateTime     @default(now())
+}
+
+model KnowledgeBaseDocument {
+  id            String               @id @default(uuid())
+  title         String
+  category      String
+  institution   String
+  state         String?
+  topic         String
+  language      String               @default("en")
+  content       String
+  version       String               @default("1.0")
+  active        Boolean              @default(true)
+  createdAt     DateTime             @default(now())
+  updatedAt     DateTime             @updatedAt
+
+  chunks        KnowledgeBaseChunk[]
+}
+
+model KnowledgeBaseChunk {
+  id                  String                @id @default(uuid())
+  documentId          String
+  document            KnowledgeBaseDocument @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  chunkIndex          Int
+  content             String
+  vectorEmbeddingJson String?
+  tagsJson            String?
+}
+
+model ChatSession {
+  id        String        @id @default(uuid())
+  userId    String
+  user      User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title     String        @default("New Conversation")
+  createdAt DateTime      @default(now())
+  messages  ChatMessage[]
+}
+
+model ChatMessage {
+  id          String      @id @default(uuid())
+  sessionId   String
+  session     ChatSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  sender      String      // USER or ASSISTANT
+  message     String
+  sourcesJson String?     // JSON array of sources
+  language    String      @default("en")
+  createdAt   DateTime    @default(now())
+}
+
+model AssistanceRequest {
+  id                      String        @id @default(uuid())
+  farmerId                String?
+  farmer                  User?         @relation("FarmerRequests", fields: [farmerId], references: [id])
+  farmerName              String
+  mobileNumber            String
+  state                   String
+  district                String
+  taluk                   String
+  village                 String
+  pincode                 String
+  preferredLanguage       String        @default("ta")
+  loanAccountNumberMasked String?
+  question                String?
+  assignedAreaAdminId     String?
+  assignedAdmin           User?         @relation("AdminRequests", fields: [assignedAreaAdminId], references: [id])
+  status                  String        @default("NEW") // NEW, ASSIGNED, CONTACTED, DOCUMENT_RECEIVED, COMPLETED, ESCALATED
+  priority                String        @default("NORMAL")
+  createdAt               DateTime      @default(now())
+  updatedAt               DateTime      @updatedAt
+
+  callNotes               CallNote[]
+  callSessions            CallSession[]
+}
+
+model CallSession {
+  id                  String            @id @default(uuid())
+  assistanceRequestId String
+  assistanceRequest   AssistanceRequest @relation(fields: [assistanceRequestId], references: [id], onDelete: Cascade)
+  callType            String            @default("OUTBOUND")
+  providerCallId      String?
+  startedAt           DateTime          @default(now())
+  endedAt             DateTime?
+  status              String            @default("COMPLETED")
+  recordingConsent    Boolean           @default(true)
+  notes               String?
+}
+
+model CallNote {
+  id                  String            @id @default(uuid())
+  assistanceRequestId String
+  assistanceRequest   AssistanceRequest @relation(fields: [assistanceRequestId], references: [id], onDelete: Cascade)
+  authorId            String
+  author              User              @relation(fields: [authorId], references: [id])
+  content             String
+  callDurationSeconds Int               @default(120)
+  createdAt           DateTime          @default(now())
+}
+
+model AuditLog {
+  id          String   @id @default(uuid())
+  userId      String?
+  user        User?    @relation(fields: [userId], references: [id])
+  action      String
+  entity      String
+  entityId    String?
+  detailsJson String?
+  ipAddress   String?  @default("127.0.0.1")
+  createdAt   DateTime @default(now())
+}
+
+model DocumentCategory {
+  id          String   @id @default(uuid())
+  code        String   @unique
+  name        String
+  description String
+}
+
+model SystemSetting {
+  id          String   @id @default(uuid())
+  key         String   @unique
+  value       String
+  description String?
+  updatedAt   DateTime @updatedAt
+}

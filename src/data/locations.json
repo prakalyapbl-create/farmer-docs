@@ -1,0 +1,280 @@
+{
+  "states": [
+    {
+      "code": "AS",
+      "names": {
+        "en": "Assam",
+        "as": "অসম",
+        "bn": "অসম",
+        "hi": "असम",
+        "ta": "அசாம்"
+      }
+    },
+    {
+      "code": "TN",
+      "names": {
+        "en": "Tamil Nadu",
+        "ta": "தமிழ்நாடு",
+        "hi": "तमिलनाडु",
+        "as": "তামিলનાডু"
+      }
+    },
+    {
+      "code": "UP",
+      "names": {
+        "en": "Uttar Pradesh",
+        "hi": "उत्तर प्रदेश",
+        "ta": "உத்தரப் பிரதேசம்",
+        "as": "উত্তৰ প্ৰদেশ"
+      }
+    },
+    {
+      "code": "WB",
+      "names": {
+        "en": "West Bengal",
+        "bn": "পশ্চিমবঙ্গ",
+        "hi": "पश्चिम बंगाल",
+        "as": "পশ্চিম বংগ",
+        "ta": "மேற்கு வங்கம்"
+      }
+    },
+    {
+      "code": "TS",
+      "names": {
+        "en": "Telangana",
+        "te": "తెలంగాణ",
+        "hi": "तेलंगाना",
+        "ta": "தெலங்கானா"
+      }
+    },
+    {
+      "code": "MH",
+      "names": {
+        "en": "Maharashtra",
+        "mr": "महाराष्ट्र",
+        "hi": "महाराष्ट्र",
+        "ta": "மகாராஷ்டிரா"
+      }
+    },
+    {
+      "code": "KA",
+      "names": {
+        "en": "Karnataka",
+        "kn": "ಕರ್ನಾಟಕ",
+        "hi": "कर्नाटक",
+        "ta": "கர்நாடகா"
+      }
+    },
+    {
+      "code": "GJ",
+      "names": {
+        "en": "Gujarat",
+        "gu": "ગુજરાત",
+        "hi": "गुजरात",
+        "ta": "குஜராத்"
+      }
+    },
+    {
+      "code": "PB",
+      "names": {
+        "en": "Punjab",
+        "pa": "ਪੰਜਾਬ",
+        "hi": "पंजाब",
+        "ta": "பஞ்சாப்"
+      }
+    },
+    {
+      "code": "OD",
+      "names": {
+        "en": "Odisha",
+        "or": "ଓଡ଼ିଶା",
+        "hi": "ओडिशा",
+        "ta": "ஒடிசா"
+      }
+    }
+  ],
+  "districts": [
+    {
+      "id": "assam-kamrup",
+      "stateCode": "AS",
+      "districtCode": "KAMRUP",
+      "names": {
+        "en": "Kamrup",
+        "as": "কামৰূপ",
+        "bn": "কামৰূপ",
+        "hi": "कामरूप",
+        "ta": "காம்ரூப்"
+      }
+    },
+    {
+      "id": "assam-kamrup-metro",
+      "stateCode": "AS",
+      "districtCode": "KAMRUP_METRO",
+      "names": {
+        "en": "Kamrup Metropolitan",
+        "as": "কামৰূপ মহানগৰ",
+        "bn": "কামৰূপ মহানগর",
+        "hi": "कामरूप महानगर",
+        "ta": "காம்ரூப் பெருநகரம்"
+      }
+    },
+    {
+      "id": "assam-nagaon",
+      "stateCode": "AS",
+      "districtCode": "NAGAON",
+      "names": {
+        "en": "Nagaon",
+        "as": "নগাঁও",
+        "hi": "नगांव",
+        "ta": "நாகான்"
+      }
+    },
+    {
+      "id": "assam-darrang",
+      "stateCode": "AS",
+      "districtCode": "DARRANG",
+      "names": {
+        "en": "Darrang",
+        "as": "দৰং",
+        "hi": "दरंग"
+      }
+    },
+    {
+      "id": "assam-dhubri",
+      "stateCode": "AS",
+      "districtCode": "DHUBRI",
+      "names": {
+        "en": "Dhubri",
+        "as": "ধুবুৰী",
+        "hi": "धुबरी"
+      }
+    },
+    {
+      "id": "assam-barpeta",
+      "stateCode": "AS",
+      "districtCode": "BARPETA",
+      "names": {
+        "en": "Barpeta",
+        "as": "বৰপেটা",
+        "hi": "बरपेटा"
+      }
+    },
+    {
+      "id": "assam-sivasagar",
+      "stateCode": "AS",
+      "districtCode": "SIVASAGAR",
+      "names": {
+        "en": "Sivasagar",
+        "as": "শিৱসাগৰ",
+        "hi": "शिवसागर"
+      }
+    },
+    {
+      "id": "assam-jorhat",
+      "stateCode": "AS",
+      "districtCode": "JORHAT",
+      "names": {
+        "en": "Jorhat",
+        "as": "যোৰহাট",
+        "hi": "जोरहाट"
+      }
+    },
+    {
+      "id": "assam-dibrugarh",
+      "stateCode": "AS",
+      "districtCode": "DIBRUGARH",
+      "names": {
+        "en": "Dibrugarh",
+        "as": "ডিব্ৰুগড়",
+        "hi": "डिब्रूगढ़"
+      }
+    },
+    {
+      "id": "assam-tinsukia",
+      "stateCode": "AS",
+      "districtCode": "TINSUKIA",
+      "names": {
+        "en": "Tinsukia",
+        "as": "তিনিচুকীয়া",
+        "hi": "तिनसुकिया"
+      }
+    },
+    {
+      "id": "tn-coimbatore",
+      "stateCode": "TN",
+      "districtCode": "COIMBATORE",
+      "names": {
+        "en": "Coimbatore",
+        "ta": "கோயம்புத்தூர்",
+        "hi": "कोयंबटूर",
+        "as": "কোয়েম্বাটোৰ"
+      }
+    },
+    {
+      "id": "tn-madurai",
+      "stateCode": "TN",
+      "districtCode": "MADURAI",
+      "names": {
+        "en": "Madurai",
+        "ta": "மதுரை",
+        "hi": "मदुरै"
+      }
+    },
+    {
+      "id": "tn-thanjavur",
+      "stateCode": "TN",
+      "districtCode": "THANJAVUR",
+      "names": {
+        "en": "Thanjavur",
+        "ta": "தஞ்சாவூர்",
+        "hi": "तंजौर"
+      }
+    },
+    {
+      "id": "tn-salem",
+      "stateCode": "TN",
+      "districtCode": "SALEM",
+      "names": {
+        "en": "Salem",
+        "ta": "சேலம்",
+        "hi": "सेलम"
+      }
+    },
+    {
+      "id": "up-lucknow",
+      "stateCode": "UP",
+      "districtCode": "LUCKNOW",
+      "names": {
+        "en": "Lucknow",
+        "hi": "लखनऊ",
+        "ta": "லக்னோ",
+        "as": "লখনউ"
+      }
+    },
+    {
+      "id": "wb-kolkata",
+      "stateCode": "WB",
+      "districtCode": "KOLKATA",
+      "names": {
+        "en": "Kolkata",
+        "bn": "কলকাতা",
+        "hi": "कोलकाता",
+        "as": "কলিকাতা"
+      }
+    }
+  ],
+  "languages": [
+    { "code": "as", "native": "অসমীয়া", "english": "Assamese" },
+    { "code": "bn", "native": "বাংলা", "english": "Bengali" },
+    { "code": "hi", "native": "हिन्दी", "english": "Hindi" },
+    { "code": "ta", "native": "தமிழ்", "english": "Tamil" },
+    { "code": "te", "native": "తెలుగు", "english": "Telugu" },
+    { "code": "kn", "native": "ಕನ್ನಡ", "english": "Kannada" },
+    { "code": "ml", "native": "മലയാളം", "english": "Malayalam" },
+    { "code": "mr", "native": "मराठी", "english": "Marathi" },
+    { "code": "or", "native": "ଓଡ଼ିଆ", "english": "Odia" },
+    { "code": "pa", "native": "ਪੰਜਾਬੀ", "english": "Punjabi" },
+    { "code": "gu", "native": "ગુજરાતી", "english": "Gujarati" },
+    { "code": "en", "native": "English", "english": "English" }
+  ]
+}
