@@ -31,15 +31,17 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-600 to-green-700 flex items-center justify-center text-white shadow-md shadow-emerald-600/20 group-hover:scale-105 transition-transform">
-              <FileText className="w-6 h-6" />
-            </div>
+            <img
+              src="/agroweather-logo.jpg"
+              alt="Agroweather Logo"
+              className="w-10 h-10 object-cover rounded-xl shadow-md shadow-emerald-600/20 group-hover:scale-105 transition-transform border border-emerald-100"
+            />
             <div>
-              <span className="text-xl font-extrabold text-emerald-950 tracking-tight flex items-center gap-1">
-                Farmer Docx <span className="text-emerald-600">🌾</span>
+              <span className="text-xl font-black text-emerald-950 tracking-tight flex items-center gap-1">
+                Agroweather <span className="text-emerald-600 text-sm font-bold">Docx</span>
               </span>
-              <span className="block text-[10px] font-semibold text-emerald-700 uppercase tracking-widest">
-                AGR-09 Agri Explainer
+              <span className="block text-[10px] font-bold text-emerald-700 uppercase tracking-widest">
+                Weather Intelligence & Agri Explainer
               </span>
             </div>
           </Link>

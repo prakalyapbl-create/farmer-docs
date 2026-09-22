@@ -14,9 +14,13 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* Brand Info */}
           <div className="space-y-3 md:col-span-1">
-            <div className="flex items-center gap-2 text-white font-extrabold text-xl">
-              <FileText className="w-6 h-6 text-emerald-400" />
-              <span>Farmer Docx 🌾</span>
+            <div className="flex items-center gap-2.5 text-white font-black text-xl">
+              <img
+                src="/agroweather-logo.jpg"
+                alt="Agroweather Logo"
+                className="w-7 h-7 object-cover rounded-lg border border-emerald-400/40"
+              />
+              <span>Agroweather Docx 🌾</span>
             </div>
             <p className="text-xs text-emerald-200/80 leading-relaxed">
               Understand Your Agricultural Loan Documents in Simple Language. Built for Smart India Hackathon AGR-09.
